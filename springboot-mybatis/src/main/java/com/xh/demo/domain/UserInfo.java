@@ -1,4 +1,4 @@
-package com.xh.demo.entity;
+package com.xh.demo.domain;
 
 import java.util.Date;
 
