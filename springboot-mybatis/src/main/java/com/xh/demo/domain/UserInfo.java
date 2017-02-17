@@ -8,9 +8,9 @@ import java.util.Date;
 public class UserInfo {
 
     private long id;
-    private String name;
-    private Date birthday;
-    private String email;
+    private String orgName;
+    private Date createTime;
+    private String url;
 
     public long getId() {
         return id;
@@ -20,27 +20,27 @@ public class UserInfo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getOrgName() {
+        return orgName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setOrgName(String orgName) {
+        this.orgName = orgName;
     }
 
-    public Date getBirthday() {
-        return birthday;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUrl() {
+        return url;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

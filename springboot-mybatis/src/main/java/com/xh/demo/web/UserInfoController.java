@@ -2,30 +2,43 @@ package com.xh.demo.web;
 
 import com.xh.demo.domain.UserInfo;
 import com.xh.demo.service.UserInfoService;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
  * @author Xiong Hao
  */
-@Controller
+@RestController
 @RequestMapping("/user")
 public class UserInfoController {
 
+    private Logger logger = LoggerFactory.getLogger("UserInfoController");
+
+    @Autowired
     private UserInfoService userInfoService;
 
     @RequestMapping("/list")
     @ResponseBody
-    List<UserInfo> list() {
-        /*UserInfo userInfo = new UserInfo();
-        userInfo.setId(1L);
-        userInfo.setBirthday(new Date());
-        userInfo.setEmail("x376453716@gmail.com");
-        userInfo.setName("xiongh");*/
-        return userInfoService.listUserInfo();
+    public List<UserInfo> list(UserInfo userInfo) {
+        return userInfoService.listUserInfo(userInfo);
+    }
+
+    @RequestMapping("/{id}")
+    @ResponseBody
+    public UserInfo get(@PathVariable Long id) {
+        return userInfoService.getUserInfo(id);
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseBody
+    public String controllerExceptionHandler(HttpServletRequest req, Exception e) {
+        logger.error("---ControllerException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
+        return "000001";
     }
 }
+

@@ -10,12 +10,13 @@ import java.util.List;
 /**
  * @author Xiong Hao
  */
-@Component
-public class UserInfoDaoImpl implements UserInfoDao {
+public class UserInfoDaoImpl {
 
+    public List<UserInfo> listUserInfo(UserInfo userInfo) {
+        return null;
+    }
 
-    @Override
-    public List<UserInfo> listUserInfo() {
+    public UserInfo getUserInfo(UserInfo userInfo) {
         return null;
     }
 }

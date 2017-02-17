@@ -11,6 +11,9 @@ import java.util.List;
  */
 @Mapper
 public interface UserInfoDao {
-    @Select("SELECT * FROM user_info WHERE name like #{name}")
-    List<UserInfo> listUserInfo();
+    @Select("SELECT * FROM TB_ORG")
+    List<UserInfo> listUserInfo(UserInfo userInfo);
+
+    @Select("SELECT * FROM TB_ORG WHERE ID = #{id}")
+    UserInfo getUserInfo(Long id);
 }

@@ -8,5 +8,7 @@ import java.util.List;
  * @author Xiong Hao
  */
 public interface UserInfoService {
-    List<UserInfo> listUserInfo();
+    List<UserInfo> listUserInfo(UserInfo userInfo);
+
+    UserInfo getUserInfo(Long id);
 }
