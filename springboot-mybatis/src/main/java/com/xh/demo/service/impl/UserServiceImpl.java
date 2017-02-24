@@ -7,7 +7,7 @@ import com.xh.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * @author Xiong Hao
@@ -26,5 +26,18 @@ public class UserServiceImpl implements UserInfoService {
     @Override
     public UserInfo getUserInfo(Long id) {
         return userInfoDao.getUserInfo(id);
+    }
+
+    @Override
+    public void addUserInfo() {
+        List<UserInfo> userInfoList = new ArrayList<>(9999999);
+        for (int i = 0; i < 9999999; i++) {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setCreateTime(new Date());
+            userInfo.setOrgName(UUID.randomUUID().toString());
+            userInfo.setId(new Random(i).nextInt());
+            userInfoList.add(userInfo);
+            userInfoDao.addUserInfo(userInfo);
+        }
     }
 }

@@ -11,6 +11,9 @@
     <modules>
         <module>spring-profile</module>
         <module>springboot-mybatis</module>
+        <module>concurrent-demo</module>
+        <module>network-demo</module>
+        <module>spring-beanconfig</module>
     </modules>
 
     <properties>
@@ -31,6 +34,11 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>

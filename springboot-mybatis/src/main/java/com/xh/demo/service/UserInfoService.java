@@ -11,4 +11,6 @@ public interface UserInfoService {
     List<UserInfo> listUserInfo(UserInfo userInfo);
 
     UserInfo getUserInfo(Long id);
+
+    void addUserInfo();
 }

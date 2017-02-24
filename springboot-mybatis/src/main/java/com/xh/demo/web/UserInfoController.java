@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 import java.util.List;
 
 /**
@@ -22,10 +23,20 @@ public class UserInfoController {
     @Autowired
     private UserInfoService userInfoService;
 
+    @Autowired
+    private DataSource dataSource;
+
     @RequestMapping("/list")
     @ResponseBody
     public List<UserInfo> list(UserInfo userInfo) {
-        return userInfoService.listUserInfo(userInfo);
+        long start = System.currentTimeMillis();
+        logger.info("start----");
+        List<UserInfo> list = userInfoService.listUserInfo(userInfo);
+        logger.info("list size==" + list.size());
+        long time = System.currentTimeMillis() - start;
+        logger.info("end----" + time);
+        logger.info("===>" + dataSource.toString());
+        return list;
     }
 
     @RequestMapping("/{id}")
@@ -34,11 +45,19 @@ public class UserInfoController {
         return userInfoService.getUserInfo(id);
     }
 
+    @RequestMapping("/init")
+    @ResponseBody
+    public String get() {
+        userInfoService.addUserInfo();
+        return "{retCode:000000,ret_message:success}";
+    }
+
+
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public String controllerExceptionHandler(HttpServletRequest req, Exception e) {
         logger.error("---ControllerException Handler---Host {} invokes url {} ERROR: {}", req.getRemoteHost(), req.getRequestURL(), e.getMessage());
-        return "000001";
+        return "{\"retCode\":\"000001\",\"ret_message\":\"success\"}";
     }
 }
 

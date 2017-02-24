@@ -1,4 +1,4 @@
-package com.xh.concurrent.demo;
+package com.xh.concurrent.demo.lock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,17 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * Created by xh on 11/03/16.
+ * <p>
+ * 1. Death lock
+ * Node : Parent p Child c
+ * <p>
+ * p.addChild(c)-->
+ * p.addChild(c) lock p
+ * c.setParent(p) try lock c
+ * <p>
+ * c.setParent(p)--->
+ * c.setParent(p) lock c
+ * p.addChild(c)   tryLock p
  */
 public class DeathLockTest {
 

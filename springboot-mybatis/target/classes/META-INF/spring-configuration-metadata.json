@@ -1,0 +1,11 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.xh.demo.common.MessageProperties",
+      "name": "com.xh",
+      "type": "com.xh.demo.common.MessageProperties"
+    }
+  ],
+  "properties": []
+}
