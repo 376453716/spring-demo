@@ -1,3 +1,8 @@
+### Thread && Progress
+1. Thread 
+操作系统对执行的程序的抽象，实现多个程序同时运行的效果，每个进程有独立的程序计数器、堆栈、状态信息、内存空间
+线程，一个进程中的多个执行
+
 ### jdk concurrent package
 
 1. Death lock
