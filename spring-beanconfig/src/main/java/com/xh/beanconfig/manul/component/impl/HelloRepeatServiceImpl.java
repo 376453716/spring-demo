@@ -10,6 +10,6 @@ public class HelloRepeatServiceImpl implements HelloSerice {
 
     @Override
     public void testRun() {
-        System.out.println("run.....");
+        System.out.println("run2.....");
     }
 }

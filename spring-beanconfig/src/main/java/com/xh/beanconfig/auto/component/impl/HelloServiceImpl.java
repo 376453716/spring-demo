@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 /**
  * @author Xiong Hao
  */
-@Service
 public class HelloServiceImpl implements HelloSerice {
 
     @Override
