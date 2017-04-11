@@ -1,5 +1,6 @@
 package com.xh.beanconfig.manul;
 
+import com.xh.beanconfig.manul.component.HelloDao;
 import com.xh.beanconfig.manul.component.HelloSerice;
 import com.xh.beanconfig.manul.component.impl.HelloRepeatServiceImpl;
 import com.xh.beanconfig.manul.component.impl.HelloServiceImpl;
@@ -22,15 +23,22 @@ public class FirstJavaConfiguration {
     }
 
     @Bean
-    public HelloRepeatServiceImpl helloRepeatService() {
-        return new HelloRepeatServiceImpl();
+    public HelloDao helloDao() {
+        HelloDao dao = new HelloDao();
+        dao.setMessage("dao...");
+        return dao;
+    }
+
+    @Bean(name = "helloSerice2")
+    public HelloSerice helloRepeatService() {
+        return new HelloRepeatServiceImpl(helloDao());
     }
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(FirstJavaConfiguration.class);
         HelloSerice helloSerice = context.getBean("helloSerice", HelloSerice.class);
         helloSerice.testRun();
-        HelloSerice helloSerice2 = context.getBean("helloRepeatService", HelloSerice.class);
+        HelloSerice helloSerice2 = context.getBean("helloSerice2", HelloSerice.class);
         helloSerice2.testRun();
     }
 

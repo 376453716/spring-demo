@@ -11,13 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CacheTestServiceImpl implements CacheTestService {
     @Override
-    @Cacheable(cacheNames = "sysNameCache", key = "#name")
+    @Cacheable(cacheNames = "sysNameCache", key = "#name",cacheManager="cacheManager")
     public String getName(String name) {
+        System.out.println("invoke...getName");
+        System.out.println(this.getClass());
         return String.valueOf(System.currentTimeMillis());
     }
 
     @Override
-    @Cacheable(cacheNames = "sysNameCache", key = "#name")
+    @CacheEvict(cacheNames = "sysNameCache", key = "#name")
     public void updateName(String name) {
 
     }
