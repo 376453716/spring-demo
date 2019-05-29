@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      url: jdbc:log4jdbc:mysql://39.108.248.86:3306/jeeplus_schema?characterEncoding=UTF-8&autoReconnect=true
+      username: im
+      password: Im123!@#
+  redis:
+    host: 39.108.248.86

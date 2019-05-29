@@ -1,0 +1,90 @@
+spring:
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force-response: true
+      force-request: true
+      force: true
+
+  application:
+    name: api-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      db-type: mysql
+      driver-class-name: net.sf.log4jdbc.DriverSpy
+      initialSize: 5
+      minIdle: 5
+      maxActive: 100
+      maxWait: 5000
+      filters: stat,wall
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=1000
+      time-between-eviction-runs-millis: 60000
+      wall.config.multiStatementAllow: true
+      web-stat-filter.enabled: true
+      stat-view-servlet.enabled: true
+      web-stat-filter.session-stat-enable: true
+  profiles:
+    active: dev
+  cache:
+    redis:
+      time-to-live: 600000
+    type: redis
+
+
+
+####datasource admin
+management:
+  security:
+    enabled: false
+
+
+info:
+  app:
+    java:
+      version: 1.8
+      target: 1.8
+    encoding: utf8
+    name: api-service
+
+
+#### mybatis plus
+mybatis-plus:
+  mapper-locations: classpath:/com/xh/jwt/*/repository/*Mapper.xml
+  #实体扫描，多个package用逗号或者分号分隔
+  typeAliasesPackage: com.xh.jwt.*.entity
+  global-config:
+    db-config:
+      id-type: auto
+      db-type: MYSQL
+      field-strategy: DEFAULT
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+
+
+    #自定义填充策略接口实现
+    #meta-object-handler: com.baomidou.mybatisplus.mapper.MyMetaObjectHandler
+  configuration:
+    #配置返回数据库(column下划线命名&&返回java实体是驼峰命名)，自动匹配无需as（没开启这个，SQL需要写as： select user_id as userId）
+    map-underscore-to-camel-case: true
+    cache-enabled: false
+    #配置JdbcTypeForNull, oracle数据库必须配置
+    jdbc-type-for-null: 'null'
+
+
+app.name: jwt-demo
+
+jwt:
+  header: Authorization
+  expires_in: 6 # 6个月
+  secret: queenvictoria
+
+security:
+  config:
+    ignorePath: /api/v1/sysDict/**,/auth/login,/third/**,/doc.html,/,/index,/webjars/**,/v2/**,/swagger-resources/**,/actuator/*,/netease/sms/**
+
+logging:
+  level:
+    root: info
+#  file: /home/static/api-server.log

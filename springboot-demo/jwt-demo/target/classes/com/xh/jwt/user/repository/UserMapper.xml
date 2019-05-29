@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xh.jwt.user.repository.UserMapper">
+    <resultMap id="BaseResultMap" type="com.xh.jwt.user.entity.User">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="accid" jdbcType="VARCHAR" property="accid"/>
+        <result column="token" jdbcType="VARCHAR" property="token"/>
+        <result column="mobile" jdbcType="VARCHAR" property="mobile"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="birth" jdbcType="VARCHAR" property="birth"/>
+        <result column="gender" jdbcType="BIT" property="gender"/>
+        <result column="ex" jdbcType="VARCHAR" property="ex"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="TIMESTAMP" property="remark"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, accid, token, mobile, name, icon, birth, gender, ex, create_time, update_time, 
+    is_delete
+  </sql>
+
+
+    <select id="queryUserByMobileOrAccount" resultType="com.xh.jwt.user.entity.User">
+        <bind name="queryLike" value="userQuery + '%'"/>
+        select id, accid, mobile, name, icon, birth, gender, ex
+        from user
+        where (mobile like #{queryLike} or accid like #{queryLike}) and is_delete = 0
+        order by id
+    </select>
+</mapper>
