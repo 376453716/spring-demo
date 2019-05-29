@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="xmlService3" class="com.xh.demo.spring.context.xml.bean.XmlService">
+        <!-- collaborators and configuration for this bean go here -->
+        <property name="name" value="service3"></property>
+        <property name="method" value="method3"></property>
+    </bean>
+    <!-- more bean definitions go here -->
+    <bean id="xmlService5" class="com.xh.demo.spring.context.xml.bean.ServiceFactory" factory-method="getInstants"/>
+
+</beans>

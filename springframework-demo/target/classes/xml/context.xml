@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="xmlService1" class="com.xh.demo.spring.context.xml.bean.XmlService">
+        <!-- collaborators and configuration for this bean go here -->
+        <property name="name" value="service1"/>
+        <property name="method" value="method1"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+    <!-- more bean definitions go here -->
+    <import resource="context2.xml"/>
+
+    <bean id="userService" class="com.xh.demo.spring.context.xml.bean.UserService">
+        <property name="userId" value="1"/>
+        <property name="userName" value="1"/>
+    </bean>
+
+    <alias name="xmlService1" alias="xmlService2"/>
+    <alias name="xmlService1" alias="xmlService4"/>
+
+</beans>

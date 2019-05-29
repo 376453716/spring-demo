@@ -9,18 +9,14 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>spring-profile</module>
-        <module>springboot-mybatis</module>
+        <module>springframework-demo</module>
+        <module>springboot-demo</module>
+        <module>springcloud-demo</module>
     </modules>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.1.RELEASE</version>
-    </parent>
-
     <properties>
-        <spring.version>4.3.6.RELEASE</spring.version>
+        <spring-cloud.version>Greenwich.SR1</spring-cloud.version>
+        <spring-boot.version>2.1.5.RELEASE</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
     </properties>
@@ -28,54 +24,57 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${spring.version}</version>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-web</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.0.1</version>
-                <scope>compile</scope>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.18</version>
             </dependency>
             <dependency>
-                <groupId>se.jiderhamn.classloader-leak-prevention</groupId>
-                <artifactId>classloader-leak-prevention-servlet</artifactId>
-                <version>2.1.0</version>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>1.2.42</version>
             </dependency>
             <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>1.2.17</version>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>25.0-jre</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>0.9.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>1.0.0.RELEASE</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.apache.tomcat.maven</groupId>
-                    <artifactId>tomcat7-maven-plugin</artifactId>
-                    <version>2.2</version>
-                    <configuration>
-                        <url>${deploy.url}</url>
-                        <username>${deploy.username}</username>
-                        <password>${deploy.password}</password>
-                        <update>${deploy.update}</update>
-                    </configuration>
-                </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -83,24 +82,6 @@
                         <source>${java.version}</source>
                         <target>${java.version}</target>
                         <encoding>${project.build.sourceEncoding}</encoding>
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <configuration>
-                        <!-- 激活spring profile -->
-                        <webResources>
-                            <resource>
-                                <filtering>true</filtering>
-                                <directory>src/main/webapp</directory>
-                                <includes>
-                                    <include>**/web.xml</include>
-                                </includes>
-                            </resource>
-                        </webResources>
-                        <warSourceDirectory>src/main/webapp</warSourceDirectory>
-                        <webXml>src/main/webapp/WEB-INF/web.xml</webXml>
                     </configuration>
                 </plugin>
             </plugins>
@@ -112,11 +93,6 @@
             <id>dev</id>
             <properties>
                 <profiles.active>dev</profiles.active>
-                <deploy.url>http://localhost:8080/manager/text</deploy.url>
-                <deploy.username>admin</deploy.username>
-                <deploy.password>admin</deploy.password>
-                <deploy.update>true</deploy.update>
-                <deploy.server.version>tomcat7</deploy.server.version>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -126,11 +102,6 @@
             <id>prd</id>
             <properties>
                 <profiles.active>prd</profiles.active>
-                <deploy.url>http://localhost:8080/manager/text</deploy.url>
-                <deploy.username>admin</deploy.username>
-                <deploy.password>admin</deploy.password>
-                <deploy.update>true</deploy.update>
-                <deploy.server.version>tomcat7</deploy.server.version>
             </properties>
         </profile>
     </profiles>
