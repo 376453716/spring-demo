@@ -4,6 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="myLifecycle" class="com.xh.demo.spring.context.xml.MyLifecycle"/>
+
     <bean id="xmlService1" class="com.xh.demo.spring.context.xml.bean.XmlService">
         <!-- collaborators and configuration for this bean go here -->
         <property name="name" value="service1"/>

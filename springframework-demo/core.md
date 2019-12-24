@@ -56,7 +56,39 @@ bean factory: spring容器根接口,管理所有bean
 1.  ApplicationContext使用描述bean的配置元数据进行创建和初始化
 2. 对每个bean在创建时进行提供依赖项
 ###### Circular dependencies
- 
+###### Using depends-on
+ 显式强制在使用此元素的bean初始化之前初始化一个或多个bean。
+###### Lazy-initialized Beans
+延迟实例化
+###### Autowiring Collaborators
+byName、byType、constructor
+###### Method Injection
+1. Lookup Method Injection
+#### Bean Scopes
+singleton(default)、prototype、request、session、application、websocket、Custom Scopes
+#### Customizing the Nature of a Bean
+###### Lifecycle Callbacks
+实现Spring InitializingBean和一次性bean接口，与bean生命周期的容器管理进行交互。Spring框架使用BeanPostProcessor实现来处理它能找到并调用适当方法的任何回调接口。
+1. Initialization Callbacks
+InitializingBean.afterPropertiesSet()、 init-method、 @PostConstruct 
+2. Destruction Callbacks
+DisposableBean.destroy()、 destroy-method
+3. Default Initialization and Destroy Methods
+4.Combining Lifecycle Mechanisms
+a. The InitializingBean and DisposableBean callback interfaces
+b. Custom init() and destroy() methods
+c. The @PostConstruct and @PreDestroy annotations.   
+5. Startup and Shutdown Callbacks
+6.Shutting Down the Spring IoC Container Gracefully in Non-Web Applications
+ctx.registerShutdownHook();
+###### ApplicationContextAware and BeanNameAware
+1. ApplicationContextAware
+2. BeanNameAware
+3. Other Aware Interfaces：
+####
+Bean Definition Inheritance
+
+
 
 
 

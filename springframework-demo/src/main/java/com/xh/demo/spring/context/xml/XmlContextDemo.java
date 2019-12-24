@@ -24,5 +24,6 @@ public class XmlContextDemo {
         System.out.println(service5.getName());
         context.refresh();
         System.out.println(Arrays.toString(context.getBeanDefinitionNames()));
+        context.registerShutdownHook();
     }
 }
