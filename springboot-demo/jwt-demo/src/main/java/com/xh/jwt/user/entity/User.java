@@ -53,6 +53,8 @@ public class User {
 
     @ApiModelProperty(value = "birth", example = "2000-00-00")
     private String birth;
+    
+    private String extInfo;
 
     @ApiModelProperty(value = "用户性别", example = "1", notes = "1 男 2 女 0 未知")
     private Integer gender;
